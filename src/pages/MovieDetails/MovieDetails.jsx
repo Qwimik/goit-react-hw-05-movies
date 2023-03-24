@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Suspense } from 'react';
-import { Outlet, Link, useParams } from 'react-router-dom';
+import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 
 import * as API from 'services/api';
 import { MovieContainer } from './MovieDetails.styled';
@@ -15,16 +15,18 @@ export default function MoviesDetails() {
 
   const { id } = useParams();
 
+  const location = useLocation();
+  const backLink = location.state?.from ?? '/';
+
   useEffect(() => {
     const fetch = async () => {
       try {
         const res = await API.searchMovieId(id);
         setName(res.title);
         setImgUrl(res.poster_path);
-        setUserScore(res.vote_count);
+        setUserScore(Math.round(res.vote_average * 10));
         setOverview(res.overview);
         setGenres(res.genres.map(item => item.name).join(' '));
-        console.log(res);
         return;
       } catch (error) {
         console.log(error);
@@ -34,7 +36,8 @@ export default function MoviesDetails() {
   }, [id]);
 
   return (
-    <>
+    <main>
+      <Link to={backLink}>Back to Movies</Link>
       <MovieContainer>
         <div>
           <img
@@ -55,7 +58,6 @@ export default function MoviesDetails() {
       </MovieContainer>
       <hr />
       <div>
-        <p>movies details</p>
         <div>
           <Link to="cast">Cast</Link>
         </div>
@@ -66,6 +68,6 @@ export default function MoviesDetails() {
       <Suspense fallback={<div>Loading....</div>}>
         <Outlet />
       </Suspense>
-    </>
+    </main>
   );
 }
