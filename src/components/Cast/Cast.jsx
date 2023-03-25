@@ -19,13 +19,13 @@ export default function Cast() {
       }
     };
     fetch();
-  }, []);
+  }, [id]);
 
   return (
     <div>
       <ul>
         {cast.map(item => (
-          <li key={item.id}>
+          <li key={item.cast_id}>
             <img
               src={
                 item.profile_path

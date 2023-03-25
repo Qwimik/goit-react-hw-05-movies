@@ -13,14 +13,13 @@ export default function Reviews() {
       try {
         const res = await API.reviewsMovie(id);
         setReviews(res.results);
-        console.log(res.results);
         return;
       } catch (error) {
         console.log(error);
       }
     };
     fetch();
-  }, []);
+  }, [id]);
 
   return (
     <div>

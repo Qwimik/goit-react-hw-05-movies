@@ -1,14 +1,19 @@
+import { FormWrapper, Form, Input, Button } from './SearchMovie.styled';
+
 export default function SearchMovie({ title, onChange, onSubmit }) {
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        name="title"
-        autoComplete="off"
-        value={title}
-        onChange={onChange}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <FormWrapper>
+      <Form onSubmit={onSubmit}>
+        <Input
+          type="text"
+          name="title"
+          autoComplete="off"
+          value={title}
+          onChange={onChange}
+          autoFocus
+        />
+        <Button type="submit">Search</Button>
+      </Form>
+    </FormWrapper>
   );
 }

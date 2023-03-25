@@ -11,6 +11,7 @@ export default function Home() {
       try {
         const res = await API.searchTrending();
         setTrendingMovies(res.results);
+        console.log(res.results);
         return;
       } catch (error) {
         console.log(error);

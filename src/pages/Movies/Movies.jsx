@@ -1,5 +1,7 @@
 import SearchMovie from 'components/SearchMovie';
 import TrendingList from 'components/TrendingList';
+import { Container } from 'components/App/App.styled';
+
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -13,45 +15,39 @@ export default function Movies() {
 
   useEffect(() => {
     if (!movieTitle) return;
+    const fetch = async () => {
+      try {
+        const res = await API.searchMovieTitle(movieTitle);
+        setMovies(res.results);
+        return;
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetch();
-  }, []);
-
-  useEffect(() => {
-    if (movieTitle === '') {
-      setSearchParams({});
-    }
   }, [movieTitle]);
-
-  const fetch = async () => {
-    try {
-      const res = await API.searchMovieTitle(movieTitle);
-      setMovies(res.results);
-      return;
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const onSubmit = e => {
     e.preventDefault();
-    if (!movieTitle.trim()) {
+    if (!title.trim()) {
       alert('bad 404');
       return;
     }
-    fetch();
-    e.target.reset();
+    const nextParams = title !== '' ? { title } : {};
+    setSearchParams(nextParams);
+    setTitle('');
   };
 
   const onChange = e => {
     setTitle(e.target.value);
-    const nextParams = e.target.value !== '' ? { title: e.target.value } : {};
-    setSearchParams(nextParams);
   };
 
   return (
     <main>
-      <SearchMovie title={title} onChange={onChange} onSubmit={onSubmit} />
-      <TrendingList items={movies} />
+      <Container>
+        <SearchMovie title={title} onChange={onChange} onSubmit={onSubmit} />
+        <TrendingList items={movies} />
+      </Container>
     </main>
   );
 }

@@ -1,21 +1,35 @@
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { Container, Header, Nav } from '../App/App.styled';
+import { Outlet } from 'react-router-dom';
+import { Header, NavWrapper, Nav, Title, Link } from './SharedLayout.styled';
+import { Container } from 'components/App/App.styled';
+import { SiThemoviedatabase } from 'react-icons/si';
+import { IconContext } from 'react-icons';
 
 function SharedLayout() {
   return (
-    <Container>
+    <>
       <Header>
-        <div>Logo</div>
-        <Nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/movies">Movies</NavLink>
-        </Nav>
+        <Container>
+          <NavWrapper>
+            <IconContext.Provider value={{ size: '50px', color: 'orangered' }}>
+              <div>
+                <SiThemoviedatabase />
+              </div>
+            </IconContext.Provider>
+            <div>
+              <Title>Movie - DataBase</Title>
+            </div>
+            <Nav>
+              <Link to="/">Home</Link>
+              <Link to="/movies">Movies</Link>
+            </Nav>
+          </NavWrapper>
+        </Container>
       </Header>
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
-    </Container>
+    </>
   );
 }
 

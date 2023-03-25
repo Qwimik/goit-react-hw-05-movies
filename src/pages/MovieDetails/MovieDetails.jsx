@@ -6,7 +6,7 @@ import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import * as API from 'services/api';
 import { MovieContainer } from './MovieDetails.styled';
 
-export default function MoviesDetails() {
+export default function MoviesDetails({ movieTitle }) {
   const [name, setName] = useState(null);
   const [imgUrl, setImgUrl] = useState(null);
   const [userScore, setUserScore] = useState(null);
@@ -59,10 +59,14 @@ export default function MoviesDetails() {
       <hr />
       <div>
         <div>
-          <Link to="cast">Cast</Link>
+          <Link to="cast" state={{ from: backLink }}>
+            Cast
+          </Link>
         </div>
         <div>
-          <Link to="reviews">Reviews</Link>
+          <Link to="reviews" state={{ from: backLink }}>
+            Reviews
+          </Link>
         </div>
       </div>
       <Suspense fallback={<div>Loading....</div>}>
