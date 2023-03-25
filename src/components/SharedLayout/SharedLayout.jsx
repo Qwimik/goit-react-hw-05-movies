@@ -4,6 +4,7 @@ import { Header, NavWrapper, Nav, Title, Link } from './SharedLayout.styled';
 import { Container } from 'components/App/App.styled';
 import { SiThemoviedatabase } from 'react-icons/si';
 import { IconContext } from 'react-icons';
+import Loading from 'components/Loading';
 
 function SharedLayout() {
   return (
@@ -11,11 +12,15 @@ function SharedLayout() {
       <Header>
         <Container>
           <NavWrapper>
-            <IconContext.Provider value={{ size: '50px', color: 'orangered' }}>
-              <div>
-                <SiThemoviedatabase />
-              </div>
-            </IconContext.Provider>
+            <Link to="/">
+              <IconContext.Provider
+                value={{ size: '50px', color: 'orangered' }}
+              >
+                <div>
+                  <SiThemoviedatabase />
+                </div>
+              </IconContext.Provider>
+            </Link>
             <div>
               <Title>Movie - DataBase</Title>
             </div>
@@ -26,7 +31,7 @@ function SharedLayout() {
           </NavWrapper>
         </Container>
       </Header>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
     </>

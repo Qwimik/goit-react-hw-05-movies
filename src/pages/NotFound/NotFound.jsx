@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Wrapper, ErrorText, ErrorLink } from './NotFound.styled';
 
 export default function NotFound() {
   return (
-    <div>
-      <Link to="/">back</Link>
-      <p>-----Error 404-----</p>
-    </div>
+    <Wrapper>
+      <ErrorText>
+        Oops, page Not Found, <ErrorLink to="/">&gt;click here&lt;</ErrorLink>{' '}
+        to return.{' '}
+      </ErrorText>
+    </Wrapper>
   );
 }

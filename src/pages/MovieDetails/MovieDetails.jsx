@@ -1,10 +1,22 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Suspense } from 'react';
-import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import { Container } from 'components/App/App.styled';
+import { MdOutlineArrowBackIosNew, MdOutlineReviews } from 'react-icons/md';
+import { BsFillPeopleFill } from 'react-icons/bs';
+import {
+  BackLink,
+  Icon,
+  ContentWrapper,
+  ImgThumb,
+  Title,
+  LinksWrapper,
+  LinkMore,
+} from './MoviesDetails.styled';
 
 import * as API from 'services/api';
-import { MovieContainer } from './MovieDetails.styled';
+import Loading from 'components/Loading';
 
 export default function MoviesDetails({ movieTitle }) {
   const [name, setName] = useState(null);
@@ -37,41 +49,59 @@ export default function MoviesDetails({ movieTitle }) {
 
   return (
     <main>
-      <Link to={backLink}>Back to Movies</Link>
-      <MovieContainer>
-        <div>
-          <img
-            src={`https://image.tmdb.org/t/p/original${imgUrl}`}
-            alt={name}
-            width="200"
-            height="300"
-          />
-        </div>
-        <div>
-          <h2>{name ?? 'Name'}</h2>
-          <p>User Score: {userScore ?? 0}%</p>
-          <h3>Overview</h3>
-          <p>{overview ?? 'Overview'}</p>
-          <h3>Genres</h3>
-          <p>{genres ?? 'Genres'}</p>
-        </div>
-      </MovieContainer>
-      <hr />
-      <div>
-        <div>
-          <Link to="cast" state={{ from: backLink }}>
-            Cast
-          </Link>
-        </div>
-        <div>
-          <Link to="reviews" state={{ from: backLink }}>
-            Reviews
-          </Link>
-        </div>
-      </div>
-      <Suspense fallback={<div>Loading....</div>}>
-        <Outlet />
-      </Suspense>
+      <Container>
+        <BackLink to={backLink}>
+          <Icon>
+            <MdOutlineArrowBackIosNew />
+          </Icon>
+          <span>Back to Movies</span>
+        </BackLink>
+        <ContentWrapper>
+          <ImgThumb>
+            <img
+              src={
+                imgUrl
+                  ? `https://image.tmdb.org/t/p/original${imgUrl}`
+                  : 'https://picsum.photos/300/450?random=1'
+              }
+              alt={name}
+              width="300"
+              height="450"
+              loading="lazy"
+            />
+          </ImgThumb>
+          <div>
+            <Title>{name ?? 'Name'}</Title>
+            <p>User Score: {userScore ?? 0}%</p>
+            <h3>Overview</h3>
+            <p>{overview ?? 'Overview'}</p>
+            <h3>Genres</h3>
+            <p>{genres ?? 'Genres'}</p>
+          </div>
+        </ContentWrapper>
+        <hr />
+        <LinksWrapper>
+          <div>
+            <LinkMore to="cast" state={{ from: backLink }}>
+              <Icon>
+                <BsFillPeopleFill />
+              </Icon>
+              Cast
+            </LinkMore>
+          </div>
+          <div>
+            <LinkMore to="reviews" state={{ from: backLink }}>
+              <Icon>
+                <MdOutlineReviews />
+              </Icon>
+              Reviews
+            </LinkMore>
+          </div>
+        </LinksWrapper>
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
+      </Container>
     </main>
   );
 }

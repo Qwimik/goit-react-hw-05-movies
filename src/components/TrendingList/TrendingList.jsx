@@ -22,6 +22,7 @@ export default function TrendingList({ items }) {
                 <MovieWrapper>
                   <div>
                     <img
+                      loading="lazy"
                       src={
                         item.poster_path
                           ? `https://image.tmdb.org/t/p/original${item.poster_path}`
@@ -29,9 +30,12 @@ export default function TrendingList({ items }) {
                       }
                       alt={item.title ?? item.name ?? item.original_title}
                       width="200"
+                      height="300"
                     />
                   </div>
-                  <Text>{item.title ?? item.name ?? item.original_title}</Text>
+                  <Text>
+                    {item.title ?? item.name ?? item.original_title ?? 'Title'}
+                  </Text>
                 </MovieWrapper>
               </LinkMovie>
             </Movie>

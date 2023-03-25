@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  CastList,
+  CastPerson,
+  CastTextContainer,
+  CastName,
+  CastDesr,
+} from './Cast.styled';
+import { NoResult } from 'components/Reviews/Reviews.styled';
 
 import * as API from 'services/api';
 
@@ -23,25 +31,35 @@ export default function Cast() {
 
   return (
     <div>
-      <ul>
-        {cast.map(item => (
-          <li key={item.cast_id}>
-            <img
-              src={
-                item.profile_path
-                  ? `https://image.tmdb.org/t/p/original${item.profile_path}`
-                  : `https://picsum.photos/200/300?random=${(count += 1)}`
-              }
-              alt={item.character ? item.character : item.original_name}
-              width="100"
-            />
-            <p>Name: {item.name ?? item.original_name}</p>
-            <p>
-              Character: {item.character ? item.character : item.original_name}
-            </p>
-          </li>
-        ))}
-      </ul>
+      {cast.length > 0 ? (
+        <CastList>
+          {cast.map(item => (
+            <CastPerson key={item.cast_id}>
+              <img
+                src={
+                  item.profile_path
+                    ? `https://image.tmdb.org/t/p/original${item.profile_path}`
+                    : `https://picsum.photos/200/300?random=${(count += 1)}`
+                }
+                alt={item.character ? item.character : item.original_name}
+                width="150"
+              />
+              <CastTextContainer>
+                <CastDesr>Name</CastDesr>
+                <CastName>{item.name ?? item.original_name ?? 'Name'}</CastName>
+                <CastDesr>Character</CastDesr>
+                <CastName>
+                  {item.character
+                    ? item.character
+                    : item.original_name ?? 'Character'}
+                </CastName>
+              </CastTextContainer>
+            </CastPerson>
+          ))}
+        </CastList>
+      ) : (
+        <NoResult>No results</NoResult>
+      )}
     </div>
   );
 }

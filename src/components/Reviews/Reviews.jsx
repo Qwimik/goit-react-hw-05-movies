@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  ReviewWrapper,
+  ReviewList,
+  Review,
+  TextContainer,
+  Author,
+  NoResult,
+} from './Reviews.styled';
 
 import * as API from 'services/api';
 
@@ -22,11 +30,11 @@ export default function Reviews() {
   }, [id]);
 
   return (
-    <div>
+    <ReviewWrapper>
       {reviews.length !== 0 ? (
-        <ul>
+        <ReviewList>
           {reviews.map(item => (
-            <li key={item.id}>
+            <Review key={item.id}>
               <img
                 src={
                   item.author_details.avatar_path
@@ -38,14 +46,18 @@ export default function Reviews() {
                 alt={item.author}
                 width="100"
               />
-              <p>{item.author ?? item.author_details.username}</p>
-              <p>{item.content}</p>
-            </li>
+              <TextContainer>
+                <Author>
+                  {item.author ?? item.author_details.username ?? 'Author'}
+                </Author>
+                <span>{item.content ?? 'No comments'}</span>
+              </TextContainer>
+            </Review>
           ))}
-        </ul>
+        </ReviewList>
       ) : (
-        <p>No results</p>
+        <NoResult>No results</NoResult>
       )}
-    </div>
+    </ReviewWrapper>
   );
 }
