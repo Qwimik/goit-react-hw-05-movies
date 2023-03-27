@@ -6,7 +6,7 @@ const API_KEY = '3217ae06898d6f0a1d4d89e84bb85582';
 axios.defaults.baseURL = BASE_URL;
 
 export const searchTrending = async () => {
-  const res = await axios.get(`/trending/all/day?api_key=${API_KEY}`);
+  const res = await axios.get(`/trending/all/week?api_key=${API_KEY}`);
   return res.data;
 };
 

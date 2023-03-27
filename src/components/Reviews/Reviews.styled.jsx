@@ -40,4 +40,5 @@ export const Author = styled.span`
 export const NoResult = styled.p`
   font-weight: 500;
   font-size: 18px;
+  text-align: center;
 `;

@@ -1,6 +1,7 @@
 import SearchMovie from 'components/SearchMovie';
 import TrendingList from 'components/TrendingList';
 import { Container } from 'components/App/App.styled';
+import { NoResult } from 'components/Reviews/Reviews.styled';
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -41,12 +42,15 @@ export default function Movies() {
   const onChange = e => {
     setTitle(e.target.value);
   };
-
   return (
     <main>
       <Container>
         <SearchMovie title={title} onChange={onChange} onSubmit={onSubmit} />
-        <TrendingList items={movies} />
+        {movies.length > 0 ? (
+          <TrendingList items={movies} />
+        ) : (
+          <NoResult>Please, enter your request.</NoResult>
+        )}
       </Container>
     </main>
   );

@@ -33,8 +33,11 @@ export const ContentWrapper = styled.div`
 export const ImgThumb = styled.div`
   border-radius: 10px;
   overflow: hidden;
-  flex: 1 0 auto;
+  flex: 0 0 300px;
   box-shadow: 0px 0px 4px #242424;
+  & img {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h2`
@@ -65,4 +68,10 @@ export const LinkMore = styled(Link)`
     box-shadow: 0px 0px 4px #242424, inset 0px 0px 15px 5px #fff;
     color: orangered;
   }
+`;
+
+export const ErrorText = styled.p`
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
 `;
