@@ -11,6 +11,7 @@ export const ReviewList = styled.ul`
   flex-direction: column;
   gap: 50px;
   list-style: none;
+  max-width: 100%;
 `;
 
 export const Review = styled.li`

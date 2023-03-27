@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import SearchMovie from 'components/SearchMovie';
 import TrendingList from 'components/TrendingList';
 import { Container } from 'components/App/App.styled';
 import { NoResult } from 'components/Reviews/Reviews.styled';
-
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 import * as API from 'services/api';
 
@@ -55,3 +56,9 @@ export default function Movies() {
     </main>
   );
 }
+
+Movies.propTypes = {
+  title: PropTypes.string,
+  movies: PropTypes.array,
+  searchParams: PropTypes.string,
+};

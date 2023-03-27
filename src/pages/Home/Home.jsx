@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import TrendingList from 'components/TrendingList';
 import * as API from 'services/api';
@@ -25,3 +26,7 @@ export default function Home() {
     </>
   );
 }
+
+Home.propTypes = {
+  trendingMovies: PropTypes.array,
+};

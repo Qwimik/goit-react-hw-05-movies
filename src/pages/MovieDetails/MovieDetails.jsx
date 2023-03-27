@@ -1,9 +1,14 @@
 import { useState, useMemo } from 'react';
 import { Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
-import { Container } from 'components/App/App.styled';
+import PropTypes from 'prop-types';
+
 import { MdOutlineArrowBackIosNew, MdOutlineReviews } from 'react-icons/md';
 import { BsFillPeopleFill } from 'react-icons/bs';
+
+import { Container } from 'components/App/App.styled';
+import Loading from 'components/Loading';
+import MovieDetailsComponent from 'components/MovieDetailsComponent/MovieDetailsComponent';
 import {
   BackLink,
   Icon,
@@ -13,8 +18,6 @@ import {
 } from './MoviesDetails.styled';
 
 import * as API from 'services/api';
-import Loading from 'components/Loading';
-import MovieDetailsComponent from 'components/MovieDetailsComponent/MovieDetailsComponent';
 
 export default function MoviesDetails() {
   const [data, setData] = useState(null);
@@ -80,3 +83,8 @@ export default function MoviesDetails() {
     </main>
   );
 }
+
+MoviesDetails.propTypes = {
+  data: PropTypes.object,
+  status: PropTypes.string,
+};

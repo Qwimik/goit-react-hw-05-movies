@@ -6,7 +6,7 @@ import { SiThemoviedatabase } from 'react-icons/si';
 import { IconContext } from 'react-icons';
 import Loading from 'components/Loading';
 
-function SharedLayout() {
+export default function SharedLayout() {
   return (
     <>
       <Header>
@@ -37,5 +37,3 @@ function SharedLayout() {
     </>
   );
 }
-
-export default SharedLayout;

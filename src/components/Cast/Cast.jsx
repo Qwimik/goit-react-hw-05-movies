@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { NoResult } from 'components/Reviews/Reviews.styled';
 import {
   CastList,
   CastPerson,
@@ -7,7 +10,6 @@ import {
   CastName,
   CastDesr,
 } from './Cast.styled';
-import { NoResult } from 'components/Reviews/Reviews.styled';
 
 import * as API from 'services/api';
 
@@ -63,3 +65,8 @@ export default function Cast() {
     </div>
   );
 }
+
+Cast.propTypes = {
+  cast: PropTypes.array,
+  count: PropTypes.number,
+};
