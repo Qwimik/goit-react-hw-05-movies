@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import SearchMovie from 'components/SearchMovie';
 import TrendingList from 'components/TrendingList';
@@ -9,17 +11,47 @@ import { NoResult } from 'components/Reviews/Reviews.styled';
 
 import * as API from 'services/api';
 
+function notifyWarn() {
+  toast.warn("Sorry, we didn't find anything", {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'colored',
+  });
+}
+
+function notifyError() {
+  toast.error('You have not entered anything in the search', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'colored',
+  });
+}
+
 export default function Movies() {
-  const [title, setTitle] = useState('');
-  const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const movieTitle = searchParams.get('title') ?? '';
+  const [title, setTitle] = useState(() => movieTitle ?? '');
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     if (!movieTitle) return;
     const fetch = async () => {
       try {
         const res = await API.searchMovieTitle(movieTitle);
+        if (res.total_results === 0) {
+          notifyWarn();
+          return;
+        }
         setMovies(res.results);
         return;
       } catch (error) {
@@ -32,12 +64,11 @@ export default function Movies() {
   const onSubmit = e => {
     e.preventDefault();
     if (!title.trim()) {
-      alert('bad 404');
+      notifyError();
       return;
     }
     const nextParams = title !== '' ? { title } : {};
     setSearchParams(nextParams);
-    setTitle('');
   };
 
   const onChange = e => {
@@ -52,13 +83,8 @@ export default function Movies() {
         ) : (
           <NoResult>Please, enter your request.</NoResult>
         )}
+        <ToastContainer />
       </Container>
     </main>
   );
 }
-
-Movies.propTypes = {
-  title: PropTypes.string,
-  movies: PropTypes.array,
-  searchParams: PropTypes.string,
-};

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { FormWrapper, Form, Input, Button } from './SearchMovie.styled';
 
 export default function SearchMovie({ title, onChange, onSubmit }) {
@@ -17,3 +19,9 @@ export default function SearchMovie({ title, onChange, onSubmit }) {
     </FormWrapper>
   );
 }
+
+SearchMovie.propTypes = {
+  title: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};

@@ -1,4 +1,7 @@
 import { useLocation } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
+
 import { Container } from 'components/App/App.styled';
 import {
   MoviesList,
@@ -45,3 +48,7 @@ export default function TrendingList({ items }) {
     </Container>
   );
 }
+
+TrendingList.propTypes = {
+  items: PropTypes.array.isRequired,
+};

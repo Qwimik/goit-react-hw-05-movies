@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { MdOutlineArrowBackIosNew, MdOutlineReviews } from 'react-icons/md';
 import { BsFillPeopleFill } from 'react-icons/bs';
@@ -83,8 +82,3 @@ export default function MoviesDetails() {
     </main>
   );
 }
-
-MoviesDetails.propTypes = {
-  data: PropTypes.object,
-  status: PropTypes.string,
-};

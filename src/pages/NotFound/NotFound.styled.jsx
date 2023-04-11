@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,8 +10,8 @@ export const Wrapper = styled.div`
 `;
 
 export const ErrorText = styled.span`
-  font-weight: 500;
-  font-size: 36px;
+  font-size: 18px;
+  font-weight: 300;
 `;
 
 export const ErrorLink = styled(Link)`

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import {
   ReviewWrapper,
@@ -63,8 +62,3 @@ export default function Reviews() {
     </ReviewWrapper>
   );
 }
-
-Reviews.propTypes = {
-  reviews: PropTypes.array,
-  count: PropTypes.number,
-};

@@ -3,6 +3,7 @@ import {
   ImgThumb,
   Title,
 } from 'pages/MovieDetails/MoviesDetails.styled';
+import PropTypes from 'prop-types';
 
 export default function MovieDetailsComponent({ data }) {
   if (data) {
@@ -34,3 +35,7 @@ export default function MovieDetailsComponent({ data }) {
     );
   }
 }
+
+MovieDetailsComponent.propTypes = {
+  data: PropTypes.object.isRequired,
+};

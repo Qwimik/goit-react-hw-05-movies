@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { NoResult } from 'components/Reviews/Reviews.styled';
 import {
@@ -65,8 +64,3 @@ export default function Cast() {
     </div>
   );
 }
-
-Cast.propTypes = {
-  cast: PropTypes.array,
-  count: PropTypes.number,
-};
